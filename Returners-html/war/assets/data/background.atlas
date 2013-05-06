@@ -1,0 +1,19 @@
+
+background.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Layer0
+  rotate: false
+  xy: 0, 0
+  size: 1280, 720
+  orig: 1280, 720
+  offset: 0, 0
+  index: -1
+Layer1
+  rotate: true
+  xy: 1282, 80
+  size: 640, 360
+  orig: 640, 360
+  offset: 0, 0
+  index: -1
