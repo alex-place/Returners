@@ -1,0 +1,46 @@
+Title: The Returners
+Style: 2D castle defense
+
+V0.1.4
+
+	* Fixed a bug stopping android build from working.
+	* Added back in enemie waves.
+
+
+V0.1.3
+
+	* Fixed that disgusting bug where shit crashed randomly :)
+	* Fixed enemies positioning on-screen.
+
+
+V0.1.2
+
+	* Changed game concept. Added new splash screen, new menu layout, and a settings page.
+	* Added new game art and logo.
+	* Created an online presence for up coming release.
+	* Added a stationary turret for player. Made bullets shoot as player drags finger. Made torrent rotate to face shooting direction.
+	* Added new prototype enemy block. Made block come in and stop at wall.
+	* WIP Added new protoytpe enemy shooter. Made shooter stop at a distance and shoot at wall.
+	* Rolled back libGDX to original build. Fixed bugs.
+	* Fixed bug preventing world and renderer from being disposed properly.
+	* Scrapped the HUD and background.
+	* Added  a basic storyline.
+	* Fixed enemies speed.
+	* Fixed enemies shooting.
+	* Refined enemies shooting.
+
+
+Title: Angry Masons
+Style: top-down space adventure/shooter
+
+V0.1.1
+
+	* Started making  the heads up display.
+	*  Fixed memory leak.
+	*  Started work on parallax background.
+
+
+V0.1.0
+
+	* Finished all 10 tutorials on libGDX.
+
