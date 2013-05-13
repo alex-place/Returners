@@ -1,10 +1,24 @@
 Title: The Returners
 Style: 2D castle defense
 
+V0.1.6
+
+	* Minor bug fixes.
+	* Began work on preferences and volume settings.
+	* Settings ui is being remodeled.
+
+
+V0.1.5
+
+	* Added nightly builds and changelog to github repo
+	* Fixed desktop exporting. Runnable jar file working.
+	* Beginning to fix WebGL exporting.
+
+
 V0.1.4
 
 	* Fixed a bug stopping android build from working.
-	* Added back in enemie waves.
+	* Added back in enemy waves.
 
 
 V0.1.3
