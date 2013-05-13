@@ -1,0 +1,43 @@
+package com.undeadstudio.returners.model;
+
+import com.badlogic.gdx.math.Vector2;
+
+public class Boss extends Enemy {
+
+	public Boss(float SPEED, float rotation, float width, float height,
+			Vector2 position) {
+		super(SPEED, rotation, width, height, position);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public boolean advance(float delta, Player ship) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void isHit() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public float getHealth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void attack(World world) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public TYPE getType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

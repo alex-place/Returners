@@ -55,6 +55,8 @@ public class InputHandler implements InputProcessor {
 			// SettingsScreen.GAME_PAUSED = !SettingsScreen.GAME_PAUSED;
 
 			world.getGame().setScreen(new MainMenu(world.getGame()));
+		case Keys.SPACE:
+			world.getGame().DEBUG = !world.getGame().DEBUG;
 		default:
 			break;
 
@@ -88,10 +90,10 @@ public class InputHandler implements InputProcessor {
 		case Keys.LEFT:
 			player.getVelocity().x = 0;
 			break;
-			
+
 		case Keys.BACK:
 			world.getGame().setScreen(new MainMenu(world.getGame()));
-			
+
 		default:
 			break;
 		}
@@ -111,12 +113,14 @@ public class InputHandler implements InputProcessor {
 		vec2Touch.set(touch.x, touch.y);
 		player = world.getPlayer();
 
-		//player.setRotation(new Vector2(vec2Touch.sub(player.getPosition()).nor()).angle() );
-		
-		world.addBullet(new Bullet(Bullet.getSpeed(), 0, .1f, 8 / 20f, new Vector2(
-				player.getPosition().x + player.getWidth() / 2, player
-						.getPosition().y + player.getHeight() / 2),
-				new Vector2(vec2Touch.sub(player.getPosition()).nor()), Bullet.TYPE.FRIEND));
+		// player.setRotation(new
+		// Vector2(vec2Touch.sub(player.getPosition()).nor()));
+
+		world.addBullet(new Bullet(Bullet.getSpeed(), 0, .1f, 8 / 20f,
+				new Vector2(player.getPosition().x + player.getWidth() / 2,
+						player.getPosition().y + player.getHeight() / 2),
+				new Vector2(vec2Touch.sub(player.getPosition()).nor()),
+				Bullet.TYPE.FRIEND));
 
 		if (Returners.DEBUG) {
 			Gdx.app.log(Returners.LOG, "Bow rotation: " + player.getRotation());
@@ -134,7 +138,7 @@ public class InputHandler implements InputProcessor {
 	@Override
 	public boolean touchDragged(int x, int y, int pointer) {
 
-		if (i  >= counter) {
+		if (i >= counter) {
 			i = 0;
 			touch.set(x, y, 0);
 			world.getRenderer().getCamera().unproject(touch);
@@ -144,10 +148,10 @@ public class InputHandler implements InputProcessor {
 			world.addBullet(new Bullet(Bullet.getSpeed(), 0, .1f, 8 / 20f,
 					new Vector2(player.getPosition().x + player.getWidth() / 2,
 							player.getPosition().y + player.getHeight() / 2),
-					new Vector2(vec2Touch.sub(player.getPosition()).nor()), Bullet.TYPE.FRIEND));
+					new Vector2(vec2Touch.sub(player.getPosition()).nor()),
+					Bullet.TYPE.FRIEND));
 
 			// AngryAudio.shoot();
-
 
 			if (Returners.DEBUG) {
 				Gdx.app.log(Returners.LOG, "Bullet created!");
@@ -168,7 +172,5 @@ public class InputHandler implements InputProcessor {
 	public boolean scrolled(int amount) {
 		return false;
 	}
-	
-	
 
 }

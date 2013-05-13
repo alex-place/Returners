@@ -1,24 +1,27 @@
 package com.undeadstudio.returners.screens;
 
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
-import com.swarmconnect.Swarm;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.undeadstudio.returners.Returners;
+import com.undeadstudio.returners.persistence.Settings;
 
 public class SettingsScreen implements Screen {
 
@@ -27,7 +30,7 @@ public class SettingsScreen implements Screen {
 	BitmapFont black;
 	BitmapFont white;
 	TextureAtlas atlas;
-	Skin skin;
+	Skin skin, sliderSkin;
 	SpriteBatch batch;
 
 	TextButton btnPlay;
@@ -35,7 +38,8 @@ public class SettingsScreen implements Screen {
 	TextButton btnDashboard;
 	Label label;
 
-	Preferences preferences;
+	Settings settings;
+	Slider volumeSlider;
 
 	public static final float width = Gdx.graphics.getWidth() / 6;
 	public static final float height = Gdx.graphics.getHeight() / 10;
@@ -52,7 +56,8 @@ public class SettingsScreen implements Screen {
 
 	public SettingsScreen(Returners game, Screen screen) {
 		this.game = game;
-		preferences = Gdx.app.getPreferences("settingsPreferences");
+		if (Gdx.app.getType() == ApplicationType.WebGL)
+			show();
 
 		if (Returners.DEBUG)
 			Gdx.app.log(Returners.LOG, "Settings screen initialized!");
@@ -73,7 +78,8 @@ public class SettingsScreen implements Screen {
 	public void show() {
 		batch = new SpriteBatch();
 		skin = new Skin();
-		atlas = new TextureAtlas("data/imgs/button.pack");
+		// sliderSkin = new Skin(Gdx.files.internal("data/uiskin.json"));
+		atlas = new TextureAtlas(Gdx.files.internal("data/imgs/button.pack"));
 		skin.addRegions(atlas);
 		white = new BitmapFont(Gdx.files.internal("data/imgs/whitefont.fnt"),
 				false);
@@ -130,7 +136,7 @@ public class SettingsScreen implements Screen {
 					int pointer, int button) {
 				if (Returners.DEBUG)
 					Gdx.app.log(Returners.LOG, "Dashboard Touched down");
-				//Swarm.showDashboard();
+				// Swarm.showDashboard();
 
 				return true;
 			}
@@ -160,6 +166,19 @@ public class SettingsScreen implements Screen {
 		label.setWidth(width);
 		label.setAlignment(Align.center);
 
+		//volumeSlider = new Slider(0f, 1f, 0.1f, false, skin);
+		// volumeSlider.setValue(settings.getVolume());
+		// volumeSlider.addListener(new ChangeListener(){
+		//
+		// @Override
+		// public void changed(ChangeEvent event, Actor actor) {
+		// volumeSlider.setValue(volumeSlider.getVisualValue());
+		// settings.setVolume(volumeSlider.getValue());
+		// }
+		//
+		// });
+
+		//stage.addActor(volumeSlider);
 		stage.addActor(btnBack);
 		stage.addActor(btnPlay);
 		stage.addActor(btnDashboard);

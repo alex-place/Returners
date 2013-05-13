@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public abstract class Enemy extends MoveableEntity {
 	public enum TYPE {
-		WALKER, SHOOTER;
+		WALKER, SHOOTER, BOSS, GENERIC;
 	}
 
 	TYPE type;
@@ -27,8 +27,7 @@ public abstract class Enemy extends MoveableEntity {
 	public abstract float getHealth();
 
 	public abstract void attack(World world);
-	
+
 	public abstract TYPE getType();
-	
 
 }

@@ -1,0 +1,13 @@
+package com.undeadstudio.returners.persistence;
+
+public class Settings {
+	
+	
+	
+	public Settings() {
+
+		
+	
+	}
+
+}

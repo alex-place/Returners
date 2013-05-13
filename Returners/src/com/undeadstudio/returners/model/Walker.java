@@ -8,7 +8,7 @@ public class Walker extends MovableEnemy {
 
 	public Walker(float SPEED, float width, float height, Vector2 position) {
 		super(SPEED, width, height, position);
-		// TODO Auto-generated constructor stub
+
 	}
 
 	@Override
@@ -21,7 +21,7 @@ public class Walker extends MovableEnemy {
 
 	@Override
 	public float getStoppingDistance() {
-		// TODO Auto-generated method stub
+
 		return 4;
 	}
 
@@ -32,13 +32,13 @@ public class Walker extends MovableEnemy {
 
 	@Override
 	public float getHealth() {
-		// TODO Auto-generated method stub
+
 		return health;
 	}
 
 	@Override
 	public TYPE getType() {
-		// TODO Auto-generated method stub
+
 		return TYPE.WALKER;
 	}
 

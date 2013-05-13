@@ -23,5 +23,11 @@ public abstract class MovableEnemy extends Enemy {
 	}
 
 	public abstract float getStoppingDistance();
+	
+	@Override
+	public TYPE getType() {
+		// TODO Auto-generated method stub
+		return TYPE.GENERIC;
+	}
 
 }

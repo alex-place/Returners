@@ -8,6 +8,7 @@ import aurelienribon.tweenengine.TweenManager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
@@ -41,10 +42,13 @@ public class SplashScreen implements Screen {
 
 	public SplashScreen(Returners returners) {
 		this.game = returners;
+		if (Gdx.app.getType() == ApplicationType.WebGL)
+			show();
 	}
 
 	@Override
 	public void render(float delta) {
+		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		manager.update(delta);

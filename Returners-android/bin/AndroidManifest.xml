@@ -1,24 +1,25 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" android:versionCode="1" android:versionName="1.0" package="com.undeadstudio.returners">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.undeadstudio.returners"
+    android:versionCode="1"
+    android:versionName="1.0" android:installLocation="auto">
 
-    <uses-sdk android:minSdkVersion="5" android:targetSdkVersion="17"/>
+    <uses-sdk android:minSdkVersion="5" android:targetSdkVersion="17" />
 
-    <application android:allowBackup="false" android:icon="@drawable/ic_launcher" android:label="@string/app_name">
-        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:label="@string/app_name" android:name="com.undeadstudio.returners.MainActivity" android:screenOrientation="landscape">
+    <application
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name" 
+        android:allowBackup="false">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:configChanges="orientation|keyboardHidden" android:label="Swarm" android:name="com.swarmconnect.SwarmMainActivity" android:screenOrientation="portrait" android:theme="@style/HoloTheme" android:windowSoftInputMode="stateHidden"/>
-        
-        <service android:name="com.swarmconnect.NotificationService" android:process=":swarm"/>
     </application>
-    
-	<uses-permission android:name="android.permission.INTERNET"/>
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-	
-	<!-- Required if using the Swarm Store features. Not required otherwise. -->
-	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
 </manifest>

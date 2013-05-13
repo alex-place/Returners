@@ -2,13 +2,13 @@ package com.undeadstudio.returners.view;
 
 import java.util.Iterator;
 
-import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -31,6 +31,7 @@ public class WorldRenderer {
 	Wall wall;
 	OrthographicCamera cam;
 	Texture playerTexture, followerTexture, shooterTexture, bulletTexture;
+	BitmapFont white, black;
 	float width, height;
 	ShapeRenderer sr;
 	TextureAtlas atlas;
@@ -66,13 +67,16 @@ public class WorldRenderer {
 		bulletTexture = new Texture("data/imgs/bullet.png");
 		bulletTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 
+		black = new BitmapFont(Gdx.files.internal("data/imgs/font.fnt"), false);
+		white = new BitmapFont(Gdx.files.internal("data/imgs/whitefont.fnt"),
+				false);
+
 		cam = new OrthographicCamera();
 		cam.setToOrtho(false, width, height);
 		cam.update();
 
 		batch = new SpriteBatch();
 		batch.setProjectionMatrix(cam.combined);
-		// batch.setColor(1f, 1f, 1f, .1f);
 
 		sr = new ShapeRenderer();
 
@@ -90,9 +94,9 @@ public class WorldRenderer {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
-//		if (Gdx.app.getType() == ApplicationType.Android) {
-//
-//		}
+		// if (Gdx.app.getType() == ApplicationType.Android) {
+		//
+		// }
 
 		// Get objects from world
 		player = world.getPlayer();
@@ -104,7 +108,7 @@ public class WorldRenderer {
 		// Commence rendering
 
 		// Draw the Heads-Up-Display(HUD)
-		sr.begin(ShapeType.Filled);
+		sr.begin(ShapeType.Line);
 		sr.setProjectionMatrix(cam.combined);
 		sr.setColor(Color.CYAN);
 
@@ -138,6 +142,9 @@ public class WorldRenderer {
 						0, followerTexture.getWidth(),
 						followerTexture.getHeight(), false, false);
 
+			// else if (e.getType() == TYPE.BOSS)
+			// batch.draw
+
 			else
 				batch.draw(followerTexture, e.getPosition().x,
 						e.getPosition().y, e.getWidth() / 2, e.getHeight() / 2,
@@ -170,11 +177,18 @@ public class WorldRenderer {
 					false, false);
 		}
 
+		if (Returners.DEBUG) {
+			black.setColor(Color.WHITE);
+			black.draw(batch, "Debug enabled", Gdx.graphics.getWidth() / 2,
+					Gdx.graphics.getHeight() / 2);
+		}
+
 		// Done rendering
 		batch.end();
 
 		// If we're debugging, draw collision boxes
 		if (Returners.DEBUG) {
+
 			sr.begin(ShapeType.Line);
 			sr.setColor(Color.CYAN);
 			sr.rect(player.getBounds().x, player.getBounds().y,

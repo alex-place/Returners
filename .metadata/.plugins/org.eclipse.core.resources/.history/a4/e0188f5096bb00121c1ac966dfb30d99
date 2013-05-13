@@ -1,0 +1,17 @@
+package com.undeadstudio.returners.persistence;
+
+import com.badlogic.gdx.Preferences;
+
+public class Settings {
+
+	GamePreferences gamePreferences;
+	Preferences preferences;
+
+	public Settings() {
+
+		gamePreferences = new GamePreferences();
+		preferences = gamePreferences.getPrefs();
+
+	}
+
+}

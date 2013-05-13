@@ -1,0 +1,7 @@
+package com.undeadstudio.returners.model;
+
+import movea;
+
+public class Boss extends movea {
+
+}

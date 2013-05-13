@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.badlogic.gdx.Game"/>
+<fullyQualifiedTypeName name="com.undeadstudio.returners.model.World"/>
+<fullyQualifiedTypeName name="com.undeadstudio.returners.view.Hud"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.math.Rectangle"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.scenes.scene2d.InputListener"/>
+<fullyQualifiedTypeName name="com.swarmconnect.Swarm"/>
+<fullyQualifiedTypeName name="com.swarmconnect.SwarmAchievement"/>
+<fullyQualifiedTypeName name="android.R"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.backends.android.AndroidApplication"/>
+<fullyQualifiedTypeName name="android.os.Bundle"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.backends.android.AndroidApplicationConfiguration"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.math.MathUtils"/>
+<fullyQualifiedTypeName name="com.undeadstudio.returners.model.MoveableEntity"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.Application.ApplicationType"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.scenes.scene2d.utils.ClickListener"/>
+<fullyQualifiedTypeName name="com.undeadstudio.returners.persistence.GamePreferences"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.Preferences"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.scenes.scene2d.utils.ChangeListener"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.scenes.scene2d.ui.Skin"/>
+</qualifiedTypeNameHistroy>

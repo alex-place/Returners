@@ -2,6 +2,7 @@ package com.undeadstudio.returners.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Application.ApplicationType;
 import com.undeadstudio.returners.Returners;
 import com.undeadstudio.returners.model.World;
 import com.undeadstudio.returners.view.WorldRenderer;
@@ -14,9 +15,13 @@ public class GameScreen implements Screen {
 
 	public GameScreen(Returners game) {
 		this.game = game;
+		if (Gdx.app.getType() == ApplicationType.WebGL)
+			show();
+
 		world = new World(game);
 		renderer = new WorldRenderer(world);
 		Gdx.graphics.setVSync(true);
+
 	}
 
 	@Override

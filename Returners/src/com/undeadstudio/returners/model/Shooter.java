@@ -1,5 +1,6 @@
 package com.undeadstudio.returners.model;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.undeadstudio.returners.screens.SettingsScreen;
 
@@ -33,9 +34,16 @@ public class Shooter extends MovableEnemy {
 
 	@Override
 	public boolean advance(float delta, Player player) {
-		if (position.x > getStoppingDistance())
+		if (position.x > getStoppingDistance()) {
+
+			position.add(velocity.tmp()
+					.mul(Gdx.graphics.getDeltaTime() * SPEED));
+
+			bounds.x = position.x;
+			bounds.y = position.y;
 			return super.advance(delta, player);
-		else
+
+		} else
 			return false;
 
 	}

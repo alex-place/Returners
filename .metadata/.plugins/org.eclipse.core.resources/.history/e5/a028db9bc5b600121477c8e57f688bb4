@@ -1,0 +1,14 @@
+package com.undeadstudio.returners.model;
+
+import com.badlogic.gdx.math.Vector2;
+
+public class Boss extends MoveableEntity {
+
+	public Boss(float SPEED, float rotation, float width, float height,
+			Vector2 position) {
+		super(SPEED, rotation, width, height, position);
+	}
+	
+	get
+
+}
