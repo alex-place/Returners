@@ -1,5 +1,11 @@
-Title: The Returners
+Title: Returners
 Style: 2D castle defense
+
+V0.1.7
+
+	* Added swarmconnect.com API
+	* Added login and leaderboard
+
 
 V0.1.6
 
