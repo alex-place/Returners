@@ -3,13 +3,13 @@ package com.undeadstudio.returners;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.undeadstudio.returners.persistence.Settings;
-import com.undeadstudio.returners.screens.GameOverScreen;
+import com.undeadstudio.returners.screens.SplashScreen;
 
 public class Returners extends Game {
 
 	public static final String VERSION = "0.1.3 Pre-Alpha";
 	public static final String LOG = "Returners " + VERSION;
-	public static boolean DEBUG = true;
+	public static boolean DEBUG = false;
 
 	Settings settings;
 
@@ -21,7 +21,7 @@ public class Returners extends Game {
 
 		settings = new Settings();
 
-		setScreen(new GameOverScreen(this));
+		setScreen(new SplashScreen(this));
 	}
 
 	@Override

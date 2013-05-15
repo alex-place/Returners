@@ -1,0 +1,77 @@
+package com.undeadstudio.returners.persistence;
+
+import com.badlogic.gdx.Gdx;
+import com.swarmconnect.Swarm;
+import com.swarmconnect.SwarmActiveUser.GotCloudDataCB;
+import com.swarmconnect.SwarmLeaderboard;
+import com.undeadstudio.returners.Returners;
+
+public class SwarmHandler {
+
+	private static boolean scoreSubmitted = false;
+	private static float score;
+
+	public static void submitHighScore(float score) {
+		if (!isScoreSubmitted())
+			SwarmLeaderboard.submitScore(9145, score);
+
+		if (Swarm.isLoggedIn())
+			Swarm.user.saveCloudData("levelScore", score + "");
+		else
+			Gdx.app.log(Returners.LOG, "Not logged in?");
+
+	}
+
+	public static float getHighScore() {
+		Gdx.app.log(Returners.LOG, "method called");
+
+//
+//		GotCloudDataCB callback = new GotCloudDataCB() {
+//			float score;
+//
+//			public void gotData(String data) {
+//
+//				// Did our request fail (network offline, and uncached)?
+//				if (data == null) {
+//
+//					// Handle failure case.
+//					Gdx.app.log(Returners.LOG, "Request failed!");
+//					return;
+//				}
+//
+//				// Has this key never been set? Default it to a value...
+//				if (data.length() == 0) {
+//
+//					// In this case, we're storing levelProgress, default them
+//					// to level 1.
+//					data = "-1";
+//					Gdx.app.log(Returners.LOG, "Empty string and failed!");
+//
+//				}
+//
+//				// Parse the level data for later use
+//				score = Integer.parseInt(data);
+//				Gdx.app.log(Returners.LOG, score + "");
+//			}
+//
+//		};
+//
+//		// Make sure a user is logged in...
+//		if (Swarm.isLoggedIn()) {
+//			Swarm.user.getCloudData("levelScore", callback);
+//		}
+
+		return score;
+
+	}
+
+	public static void setIsScoreSubmitted(boolean isSubmitted) {
+		scoreSubmitted = isSubmitted;
+
+	}
+
+	public static boolean isScoreSubmitted() {
+		return scoreSubmitted;
+	}
+
+}

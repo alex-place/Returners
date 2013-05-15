@@ -2,9 +2,9 @@ package com.undeadstudio.returners.model;
 
 import java.util.Iterator;
 
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
@@ -57,7 +57,6 @@ public class World {
 	public World(Returners game) {
 		this.game = game;
 		settings = game.getSettings();
-		score = 0;
 		player = new Player(new Vector2(SettingsScreen.GAME_WIDTH / 20,
 				SettingsScreen.GAME_HEIGHT / 2), 2, 2, 0, 5f);
 		wall = new Wall(player, new Vector2(3, 0), 1,
@@ -71,6 +70,8 @@ public class World {
 
 		Gdx.input.setCatchBackKey(true);
 		Gdx.input.setInputProcessor(plex);
+		
+		
 
 	}
 
@@ -90,9 +91,11 @@ public class World {
 
 			if (Gdx.app.getType() == ApplicationType.Android) {
 				SwarmHandler.submitHighScore(settings.getScore());
-				SwarmHandler.setScoreSubmitted(true);
+				SwarmHandler.setIsScoreSubmitted(true);
 			}
+			
 			game.setScreen(new GameOverScreen(game));
+			
 		}
 
 		stage.act();

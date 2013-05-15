@@ -1,0 +1,118 @@
+package com.undeadstudio.returners.persistence;
+
+import com.badlogic.gdx.Gdx;
+import com.swarmconnect.Swarm;
+import com.swarmconnect.SwarmActiveUser.GotCloudDataCB;
+import com.swarmconnect.SwarmLeaderboard;
+import com.undeadstudio.returners.Returners;
+
+public class SwarmHandler {
+
+	private static boolean scoreSubmitted = false;
+	private static float score = 0;
+
+	public static void submitHighScore(float score) {
+		if (!isScoreSubmitted())
+			SwarmLeaderboard.submitScore(9145, score);
+
+		//if (Swarm.isLoggedIn()) {
+			Swarm.user.saveCloudData("levelScore", "" + score);
+		//}
+
+	}
+
+	public static float getHighScore() {
+		
+		// Save our level progress to the cloud (probably right after completing a level)
+		if (Swarm.isLoggedIn()) {
+		    Swarm.user.saveCloudData("levelScore", ""+score);
+		}
+		
+		GotCloudDataCB callback = new GotCloudDataCB() {
+			public void gotData(String data) {
+
+				// Did our request fail (network offline, and uncached)?
+				if (data == null) {
+
+					// Handle failure case.
+					return;
+				}
+
+				// Has this key never been set? Default it to a value...
+				if (data.length() == 0) {
+
+					// In this case, we're storing levelProgress, default them
+					// to level 1.
+					data = "1";
+				}
+
+				// Parse the level data for later use
+				score = Integer.parseInt(data);
+			}
+		};
+
+		// Make sure a user is logged in...
+		if (Swarm.isLoggedIn()) {
+			Swarm.user.getCloudData("levelScore", callback);
+		}
+
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		Gdx.app.log(Returners.LOG,"" + score);
+		
+		return score;
+	}
+
+	public static void setScoreSubmitted(boolean isSubmitted) {
+		scoreSubmitted = isSubmitted;
+		// Save our level progress to the cloud (probably right after completing
+		// a level)
+
+	}
+
+	public static boolean isScoreSubmitted() {
+		return scoreSubmitted;
+	}
+
+}

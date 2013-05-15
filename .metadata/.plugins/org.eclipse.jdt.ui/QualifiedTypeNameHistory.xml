@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="com.badlogic.gdx.Game"/>
-<fullyQualifiedTypeName name="com.undeadstudio.returners.model.World"/>
 <fullyQualifiedTypeName name="com.undeadstudio.returners.view.Hud"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.math.Rectangle"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.scenes.scene2d.InputListener"/>
-<fullyQualifiedTypeName name="com.swarmconnect.SwarmAchievement"/>
 <fullyQualifiedTypeName name="android.R"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.backends.android.AndroidApplication"/>
 <fullyQualifiedTypeName name="android.os.Bundle"/>
@@ -23,4 +21,8 @@
 <fullyQualifiedTypeName name="com.badlogic.gdx.scenes.scene2d.ui.TextButton"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.Screen"/>
 <fullyQualifiedTypeName name="com.undeadstudio.returners.screens.GameOverScreen"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.Gdx"/>
+<fullyQualifiedTypeName name="com.undeadstudio.returners.Returners"/>
+<fullyQualifiedTypeName name="com.undeadstudio.returners.model.World"/>
+<fullyQualifiedTypeName name="com.swarmconnect.SwarmAchievement"/>
 </qualifiedTypeNameHistroy>
