@@ -13,18 +13,20 @@
 		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="Slider" key="selection"/>
+		<item value="btnPlay" key="selection"/>
 		<list key="findhistory">
-			<item value="slider"/>
-			<item value="white"/>
-			<item value="skin"/>
-			<item value="ls"/>
-			<item value="whitefont"/>
+			<item value="btnplay"/>
+			<item value="btnPlay.getHeight()"/>
+			<item value="btnPlay.getWidth()"/>
+			<item value="game"/>
 			<item value="// TODO Auto-generated method stub"/>
+			<item value="&#x09;&#x09;// TODO Auto-generated method stub"/>
 			<item value="// TODO Auto-generated constructor stub"/>
-			<item value="biter"/>
+			<item value=" // TODO Auto-generated constructor stub"/>
 		</list>
 		<list key="replacehistory">
+			<item value="SettingsScreen.height"/>
+			<item value="SettingsScreen.width"/>
 			<item value=""/>
 			<item value="Swarm"/>
 			<item value="12995"/>

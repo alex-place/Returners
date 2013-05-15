@@ -5,7 +5,6 @@
 <fullyQualifiedTypeName name="com.undeadstudio.returners.view.Hud"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.math.Rectangle"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.scenes.scene2d.InputListener"/>
-<fullyQualifiedTypeName name="com.swarmconnect.Swarm"/>
 <fullyQualifiedTypeName name="com.swarmconnect.SwarmAchievement"/>
 <fullyQualifiedTypeName name="android.R"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.backends.android.AndroidApplication"/>
@@ -13,10 +12,15 @@
 <fullyQualifiedTypeName name="com.badlogic.gdx.backends.android.AndroidApplicationConfiguration"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.math.MathUtils"/>
 <fullyQualifiedTypeName name="com.undeadstudio.returners.model.MoveableEntity"/>
-<fullyQualifiedTypeName name="com.badlogic.gdx.Application.ApplicationType"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.scenes.scene2d.utils.ClickListener"/>
 <fullyQualifiedTypeName name="com.undeadstudio.returners.persistence.GamePreferences"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.Preferences"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.scenes.scene2d.utils.ChangeListener"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.scenes.scene2d.ui.Skin"/>
+<fullyQualifiedTypeName name="com.swarmconnect.Swarm"/>
+<fullyQualifiedTypeName name="com.undeadstudio.returners.persistence.SwarmHandler"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.Application.ApplicationType"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.scenes.scene2d.ui.TextButton"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.Screen"/>
+<fullyQualifiedTypeName name="com.undeadstudio.returners.screens.GameOverScreen"/>
 </qualifiedTypeNameHistroy>

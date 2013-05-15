@@ -1,0 +1,11 @@
+package com.undeadstudio.returners.screens;
+
+import com.badlogic.gdx.Screen;
+
+
+
+public abstract class AbstractMenuScreen implements Screen {
+
+
+
+}

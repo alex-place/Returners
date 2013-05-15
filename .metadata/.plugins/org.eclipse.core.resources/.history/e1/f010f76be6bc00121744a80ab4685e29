@@ -1,0 +1,223 @@
+package com.undeadstudio.returners.screens;
+
+import com.badlogic.gdx.Application.ApplicationType;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.swarmconnect.Swarm;
+import com.undeadstudio.returners.Returners;
+import com.undeadstudio.returners.persistence.Settings;
+
+public class SettingsScreen implements Screen {
+
+	Returners game;
+	Stage stage;
+
+	SpriteBatch batch;
+	TextureAtlas atlas;
+	Skin skin;
+	BitmapFont black;
+	BitmapFont white;
+
+	TextButton btnPlay;
+	TextButton btnBack;
+	TextButton btnDashboard;
+	Label label;
+
+	Settings settings;
+	Slider volumeSlider;
+
+	public static final float width = Gdx.graphics.getWidth() / 6;
+	public static final float height = Gdx.graphics.getHeight() / 10;
+
+	public static float column1;
+	public static float column2;
+
+	// All static settings go here
+	public static boolean GAME_PAUSED = false;
+	public static float GAME_WIDTH = Gdx.graphics.getWidth() / 50;
+	public static float GAME_HEIGHT = Gdx.graphics.getHeight() / 50;
+	public static boolean GAME_OVER = false;
+	public static float VOLUME = 1;
+
+	public SettingsScreen(Returners game, Screen screen) {
+		this.game = game;
+		if (Gdx.app.getType() == ApplicationType.WebGL)
+			show();
+
+		if (Returners.DEBUG)
+			Gdx.app.log(Returners.LOG, "Settings screen initialized!");
+	}
+
+	@Override
+	public void render(float delta) {
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		stage.act(delta);
+
+		batch.begin();
+		stage.draw();
+		batch.end();
+	}
+
+	@Override
+	public void show() {
+		batch = new SpriteBatch();
+		skin = new Skin();
+		// sliderSkin = new Skin(Gdx.files.internal("data/uiskin.json"));
+		atlas = new TextureAtlas(Gdx.files.internal("data/imgs/button.pack"));
+		skin.addRegions(atlas);
+		white = new BitmapFont(Gdx.files.internal("data/imgs/whitefont.fnt"),
+				false);
+		black = new BitmapFont(Gdx.files.internal("data/imgs/font.fnt"), false);
+
+		if (Returners.DEBUG)
+			Gdx.app.log(Returners.LOG, "Settings screen initialized!");
+
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		if (stage == null) {
+			stage = new Stage(width, height, true);
+		}
+		stage.clear();
+
+		Gdx.input.setInputProcessor(stage);
+
+		TextButtonStyle style = new TextButtonStyle();
+		style.up = skin.getDrawable("buttonnormal");
+		style.down = skin.getDrawable("buttonpressed");
+		style.font = black;
+
+		btnPlay = new TextButton("Play!", style);
+		btnPlay.setWidth(SettingsScreen.width);
+		btnPlay.setHeight(SettingsScreen.height);
+
+		column1 = Gdx.graphics.getWidth() / 4 - btnPlay.getWidth() / 2;
+		column2 = 2 * (Gdx.graphics.getWidth() / 4) - btnPlay.getWidth() / 2;
+		btnPlay.setX(column1);
+		btnPlay.setY(Gdx.graphics.getHeight() / 2 - btnPlay.getHeight() / 2
+				+ 10);
+
+		btnPlay.addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+					int pointer, int button) {
+				if (Returners.DEBUG)
+					Gdx.app.log(Returners.LOG, "Touched down");
+
+				game.setScreen(new GameScreen(game));
+				return true;
+			}
+		});
+
+		btnDashboard = new TextButton("Dashboard", style);
+		btnDashboard.setX(column2);
+		btnDashboard.setY(Gdx.graphics.getHeight() / 2 - btnPlay.getHeight()
+				/ 2 + 10);
+		btnDashboard.setWidth(GAME_WIDTH);
+		btnDashboard.setHeight(GAME_HEIGHT);
+		btnDashboard.addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+					int pointer, int button) {
+				if (Returners.DEBUG)
+					Gdx.app.log(Returners.LOG, "Dashboard Touched down");
+				// Swarm.showDashboard();
+
+				Swarm.showLeaderboards();
+
+				return true;
+			}
+		});
+
+		btnBack = new TextButton("Back", style);
+		btnBack.setWidth(SettingsScreen.width);
+		btnBack.setHeight(SettingsScreen.height);
+		btnBack.setX(column2);
+		btnBack.setY(Gdx.graphics.getHeight() / 4 - btnPlay.getHeight() / 2);
+
+		btnBack.addListener(new InputListener() {
+
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+					int pointer, int button) {
+				game.setScreen(new MainMenu(game));
+				return false;
+			}
+
+		});
+
+		LabelStyle ls = new LabelStyle(white, Color.WHITE);
+		label = new Label("The Returners", ls);
+		label.setX(0);
+		label.setY(Gdx.graphics.getHeight() - 100);
+		label.setWidth(width);
+		label.setAlignment(Align.center);
+
+		// volumeSlider = new Slider(0f, 1f, 0.1f, false, skin);
+		// volumeSlider.setValue(settings.getVolume());
+		// volumeSlider.addListener(new ChangeListener(){
+		//
+		// @Override
+		// public void changed(ChangeEvent event, Actor actor) {
+		// volumeSlider.setValue(volumeSlider.getVisualValue());
+		// settings.setVolume(volumeSlider.getValue());
+		// }
+		//
+		// });
+
+		// stage.addActor(volumeSlider);
+		stage.addActor(btnBack);
+		stage.addActor(btnPlay);
+		stage.addActor(label);
+
+		if (Gdx.app.getType() == ApplicationType.Android)
+			stage.addActor(btnDashboard);
+
+	}
+
+	@Override
+	public void hide() {
+		dispose();
+	}
+
+	@Override
+	public void pause() {
+
+	}
+
+	@Override
+	public void resume() {
+
+	}
+
+	@Override
+	public void dispose() {
+		batch.dispose();
+
+		skin.dispose();
+		atlas.dispose();
+		white.dispose();
+		black.dispose();
+
+		stage.dispose();
+
+	}
+
+}

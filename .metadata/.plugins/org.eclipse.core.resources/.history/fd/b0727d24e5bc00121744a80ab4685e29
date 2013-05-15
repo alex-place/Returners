@@ -1,0 +1,9 @@
+package com.undeadstudio.returners.screens;
+
+public class GameOverScreen extends MenuScreen {
+
+	public GameOverScreen(String title, int columns, int rows, String[] labels) {
+		super(title, columns, rows, labels);
+	}
+
+}

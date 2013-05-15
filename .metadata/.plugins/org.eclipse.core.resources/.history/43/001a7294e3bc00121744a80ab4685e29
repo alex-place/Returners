@@ -1,0 +1,12 @@
+package com.undeadstudio.returners.screens;
+
+import com.badlogic.gdx.Screen;
+
+public abstract class MenuScreen implements Screen {
+
+	@Override
+	public void dispose() {
+
+	}
+
+}

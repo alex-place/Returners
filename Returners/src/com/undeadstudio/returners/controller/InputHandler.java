@@ -56,7 +56,7 @@ public class InputHandler implements InputProcessor {
 
 			world.getGame().setScreen(new MainMenu(world.getGame()));
 		case Keys.SPACE:
-			world.getGame().DEBUG = !world.getGame().DEBUG;
+			Returners.DEBUG = !Returners.DEBUG;
 		default:
 			break;
 

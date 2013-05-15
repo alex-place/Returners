@@ -1,0 +1,53 @@
+package com.undeadstudio.returners.screens;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Application.ApplicationType;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.undeadstudio.returners.Returners;
+import com.undeadstudio.returners.persistence.Settings;
+
+public abstract class AbstractMenuScreen implements Screen {
+
+	Returners game;
+	Stage stage;
+
+	SpriteBatch batch;
+	TextureAtlas atlas;
+	Skin skin;
+	BitmapFont black;
+	BitmapFont white;
+
+	TextButton btnBack;
+	TextButton btnDashboard;
+	Label label;
+
+	Settings settings;
+
+	public static final float width = Gdx.graphics.getWidth() / 6;
+	public static final float height = Gdx.graphics.getHeight() / 10;
+
+	public static float column1;
+	public static float column2;
+
+	public static boolean GAME_PAUSED = false;
+	public static float GAME_WIDTH = Gdx.graphics.getWidth() / 50;
+	public static float GAME_HEIGHT = Gdx.graphics.getHeight() / 50;
+	public static boolean GAME_OVER = false;
+	public static float VOLUME = 1;
+
+	public AbstractMenuScreen(Returners game) {
+		this.game = game;
+		if (Gdx.app.getType() == ApplicationType.WebGL)
+			show();
+
+		if (Returners.DEBUG)
+			Gdx.app.log(Returners.LOG, "Abstract menu screen initialized!");	}
+
+}

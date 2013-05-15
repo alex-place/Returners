@@ -2,7 +2,8 @@ package com.undeadstudio.returners;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.undeadstudio.returners.screens.SplashScreen;
+import com.undeadstudio.returners.persistence.Settings;
+import com.undeadstudio.returners.screens.GameOverScreen;
 
 public class Returners extends Game {
 
@@ -10,13 +11,17 @@ public class Returners extends Game {
 	public static final String LOG = "Returners " + VERSION;
 	public static boolean DEBUG = true;
 
+	Settings settings;
+
 	@Override
 	public void create() {
-		if(Returners.DEBUG){
+		if (Returners.DEBUG) {
 			Gdx.app.log(LOG, "Returners " + VERSION + " initialized!");
 		}
-		
-		setScreen(new SplashScreen(this));
+
+		settings = new Settings();
+
+		setScreen(new GameOverScreen(this));
 	}
 
 	@Override
@@ -43,4 +48,9 @@ public class Returners extends Game {
 	public void resume() {
 		super.resume();
 	}
+
+	public Settings getSettings() {
+		return settings;
+	}
+
 }

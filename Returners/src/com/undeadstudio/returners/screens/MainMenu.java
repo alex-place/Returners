@@ -22,7 +22,6 @@ import com.undeadstudio.returners.Returners;
 public class MainMenu implements Screen {
 
 	Returners game;
-	MainMenu menu;
 	Stage stage;
 	BitmapFont black;
 	BitmapFont white;
@@ -63,7 +62,6 @@ public class MainMenu implements Screen {
 		skin.addRegions(atlas);
 		white = new BitmapFont(Gdx.files.internal("data/imgs/white.fnt"), false);
 		black = new BitmapFont(Gdx.files.internal("data/imgs/font.fnt"), false);
-		menu = this;
 
 		if (Returners.DEBUG)
 			Gdx.app.log(Returners.LOG, "Main menu initialized!");
@@ -114,7 +112,7 @@ public class MainMenu implements Screen {
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
 
-				game.setScreen(new SettingsScreen(game, menu));
+				game.setScreen(new SettingsScreen(game));
 
 				return super.touchDown(event, x, y, pointer, button);
 			}

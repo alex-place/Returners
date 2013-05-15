@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
@@ -12,6 +13,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
 import com.undeadstudio.returners.Returners;
 import com.undeadstudio.returners.controller.InputHandler;
+import com.undeadstudio.returners.persistence.Settings;
+import com.undeadstudio.returners.persistence.SwarmHandler;
+import com.undeadstudio.returners.screens.GameOverScreen;
 import com.undeadstudio.returners.screens.SettingsScreen;
 import com.undeadstudio.returners.view.Hud;
 import com.undeadstudio.returners.view.WorldRenderer;
@@ -47,8 +51,13 @@ public class World {
 
 	public InputMultiplexer plex;
 
+	Settings settings;
+	float score;
+
 	public World(Returners game) {
 		this.game = game;
+		settings = game.getSettings();
+		score = 0;
 		player = new Player(new Vector2(SettingsScreen.GAME_WIDTH / 20,
 				SettingsScreen.GAME_HEIGHT / 2), 2, 2, 0, 5f);
 		wall = new Wall(player, new Vector2(3, 0), 1,
@@ -77,16 +86,19 @@ public class World {
 
 		if (wall.health <= 0) {
 			Gdx.app.log(Returners.LOG, "GAME OVER");
-			// SettingsScreen.GAME_OVER = true;
+			settings.setScore(score);
+
+			if (Gdx.app.getType() == ApplicationType.Android) {
+				SwarmHandler.submitHighScore(settings.getScore());
+				SwarmHandler.setScoreSubmitted(true);
+			}
+			game.setScreen(new GameOverScreen(game));
 		}
 
 		stage.act();
 
 		player.update();
 		wall.update();
-
-		if (Returners.DEBUG)
-			Gdx.app.log(Returners.LOG, "Size: " + enemies.size);
 
 		bIter = bullets.iterator();
 		while (bIter.hasNext()) {
@@ -112,7 +124,7 @@ public class World {
 
 					if (e.getHealth() <= 0) {
 						eIter.remove();
-
+						score++;
 					}
 
 					b.OutOfBounds = true;

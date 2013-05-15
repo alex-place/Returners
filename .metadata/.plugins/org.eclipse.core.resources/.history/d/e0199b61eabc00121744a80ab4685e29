@@ -1,0 +1,37 @@
+package com.undeadstudio.returners.screens;
+
+import com.badlogic.gdx.Screen;
+
+Returners game;
+Stage stage;
+
+SpriteBatch batch;
+TextureAtlas atlas;
+Skin skin;
+BitmapFont black;
+BitmapFont white;
+
+TextButton btnBack;
+TextButton btnDashboard;
+Label label;
+
+Settings settings;
+
+public static final float width = Gdx.graphics.getWidth() / 6;
+public static final float height = Gdx.graphics.getHeight() / 10;
+
+public static float column1;
+public static float column2;
+
+// All static settings go here
+public static boolean GAME_PAUSED = false;
+public static float GAME_WIDTH = Gdx.graphics.getWidth() / 50;
+public static float GAME_HEIGHT = Gdx.graphics.getHeight() / 50;
+public static boolean GAME_OVER = false;
+public static float VOLUME = 1;
+
+public abstract class AbstractMenuScreen implements Screen {
+
+
+
+}

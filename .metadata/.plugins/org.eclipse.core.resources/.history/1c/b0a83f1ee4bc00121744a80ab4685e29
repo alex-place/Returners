@@ -1,0 +1,49 @@
+package com.undeadstudio.returners.screens;
+
+import com.badlogic.gdx.Screen;
+
+public abstract class MenuScreen implements Screen {
+
+	float columns, rows;
+
+	public MenuScreen(float columns, float rows) {
+		this.columns = columns;
+		this.rows = rows;
+	}
+
+	@Override
+	public void render(float delta) {
+
+	}
+
+	@Override
+	public void resize(int width, int height) {
+
+	}
+
+	@Override
+	public void show() {
+
+	}
+
+	@Override
+	public void hide() {
+
+	}
+
+	@Override
+	public void pause() {
+
+	}
+
+	@Override
+	public void resume() {
+
+	}
+
+	@Override
+	public void dispose() {
+
+	}
+
+}

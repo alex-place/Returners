@@ -1,0 +1,84 @@
+package com.undeadstudio.returners.screens;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.undeadstudio.returners.Returners;
+
+public abstract class AbstractMenuScreen implements Screen {
+
+	float columns, rows;
+	TextButton[][] buttonGrid;
+	String[] labels;
+	
+	SpriteBatch batch;
+	TextureAtlas atlas;
+	Skin skin;
+	BitmapFont black;
+	BitmapFont white;
+
+	public AbstractMenuScreen(String title, int columns, int rows,
+			String[] labels) {
+		this.columns = columns;
+		this.rows = rows;
+		buttonGrid = new TextButton[columns][rows];
+		this.labels = labels;
+	}
+
+	@Override
+	public void show() {
+		
+		batch = new SpriteBatch();
+		skin = new Skin();
+		// sliderSkin = new Skin(Gdx.files.internal("data/uiskin.json"));
+		atlas = new TextureAtlas(Gdx.files.internal("data/imgs/button.pack"));
+		skin.addRegions(atlas);
+		white = new BitmapFont(Gdx.files.internal("data/imgs/whitefont.fnt"),
+				false);
+		black = new BitmapFont(Gdx.files.internal("data/imgs/font.fnt"), false);
+
+		if (Returners.DEBUG)
+			Gdx.app.log(Returners.LOG, "Settings screen initialized!");
+		
+		for (int i = 0; i < columns; i++) {
+			for (int j = 0; j < rows; j++) {
+				buttonGrid[i][j] = new TextButton(labels[i+j], skin);
+			}
+		}
+	}
+
+	@Override
+	public void render(float delta) {
+
+	}
+
+	@Override
+	public void resize(int width, int height) {
+
+	}
+
+	@Override
+	public void hide() {
+
+	}
+
+	@Override
+	public void pause() {
+
+	}
+
+	@Override
+	public void resume() {
+
+	}
+
+	@Override
+	public void dispose() {
+
+	}
+
+}

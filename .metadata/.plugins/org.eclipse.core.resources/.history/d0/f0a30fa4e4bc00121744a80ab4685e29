@@ -1,0 +1,54 @@
+package com.undeadstudio.returners.screens;
+
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+
+public abstract class MenuScreen implements Screen {
+
+	float columns, rows;
+	TextButton[][] buttonGrid;
+	String[] labels;
+
+	public MenuScreen(int columns, int rows, String[] labels) {
+		this.columns = columns;
+		this.rows = rows;
+		buttonGrid = new TextButton[columns][rows];
+		this.labels = labels;
+	}
+
+	@Override
+	public void render(float delta) {
+
+	}
+
+	@Override
+	public void resize(int width, int height) {
+
+	}
+
+	@Override
+	public void show() {
+
+	}
+
+	@Override
+	public void hide() {
+
+	}
+
+	@Override
+	public void pause() {
+
+	}
+
+	@Override
+	public void resume() {
+
+	}
+
+	@Override
+	public void dispose() {
+
+	}
+
+}

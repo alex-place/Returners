@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -19,7 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.swarmconnect.Swarm;
 import com.undeadstudio.returners.Returners;
 import com.undeadstudio.returners.persistence.Settings;
 
@@ -27,19 +26,18 @@ public class SettingsScreen implements Screen {
 
 	Returners game;
 	Stage stage;
+
+	SpriteBatch batch;
+	TextureAtlas atlas;
+	Skin skin;
 	BitmapFont black;
 	BitmapFont white;
-	TextureAtlas atlas;
-	Skin skin, sliderSkin;
-	SpriteBatch batch;
 
-	TextButton btnPlay;
 	TextButton btnBack;
 	TextButton btnDashboard;
 	Label label;
 
 	Settings settings;
-	Slider volumeSlider;
 
 	public static final float width = Gdx.graphics.getWidth() / 6;
 	public static final float height = Gdx.graphics.getHeight() / 10;
@@ -54,7 +52,7 @@ public class SettingsScreen implements Screen {
 	public static boolean GAME_OVER = false;
 	public static float VOLUME = 1;
 
-	public SettingsScreen(Returners game, Screen screen) {
+	public SettingsScreen(Returners game) {
 		this.game = game;
 		if (Gdx.app.getType() == ApplicationType.WebGL)
 			show();
@@ -104,32 +102,14 @@ public class SettingsScreen implements Screen {
 		style.down = skin.getDrawable("buttonpressed");
 		style.font = black;
 
-		btnPlay = new TextButton("Play!", style);
-		btnPlay.setWidth(SettingsScreen.width);
-		btnPlay.setHeight(SettingsScreen.height);
-
-		column1 = Gdx.graphics.getWidth() / 4 - btnPlay.getWidth() / 2;
-		column2 = 2 * (Gdx.graphics.getWidth() / 4) - btnPlay.getWidth() / 2;
-		btnPlay.setX(column1);
-		btnPlay.setY(Gdx.graphics.getHeight() / 2 - btnPlay.getHeight() / 2
-				+ 10);
-
-		btnPlay.addListener(new InputListener() {
-			@Override
-			public boolean touchDown(InputEvent event, float x, float y,
-					int pointer, int button) {
-				if (Returners.DEBUG)
-					Gdx.app.log(Returners.LOG, "Touched down");
-
-				game.setScreen(new GameScreen(game));
-				return true;
-			}
-		});
+		column1 = Gdx.graphics.getWidth() / 4 - SettingsScreen.width / 2;
+		column2 = 2 * (Gdx.graphics.getWidth() / 4) - SettingsScreen.width / 2;
 
 		btnDashboard = new TextButton("Dashboard", style);
 		btnDashboard.setX(column2);
-		btnDashboard.setY(Gdx.graphics.getHeight() / 2 - btnPlay.getHeight()
-				/ 2 + 10);
+		btnDashboard.setY(Gdx.graphics.getHeight() / 2);
+		btnDashboard.setWidth(GAME_WIDTH);
+		btnDashboard.setHeight(GAME_HEIGHT);
 		btnDashboard.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
@@ -137,6 +117,8 @@ public class SettingsScreen implements Screen {
 				if (Returners.DEBUG)
 					Gdx.app.log(Returners.LOG, "Dashboard Touched down");
 				// Swarm.showDashboard();
+
+				Swarm.showLeaderboards();
 
 				return true;
 			}
@@ -146,7 +128,7 @@ public class SettingsScreen implements Screen {
 		btnBack.setWidth(SettingsScreen.width);
 		btnBack.setHeight(SettingsScreen.height);
 		btnBack.setX(column2);
-		btnBack.setY(Gdx.graphics.getHeight() / 4 - btnPlay.getHeight() / 2);
+		btnBack.setY(Gdx.graphics.getHeight() / 4 - SettingsScreen.height / 2);
 
 		btnBack.addListener(new InputListener() {
 
@@ -166,23 +148,11 @@ public class SettingsScreen implements Screen {
 		label.setWidth(width);
 		label.setAlignment(Align.center);
 
-		//volumeSlider = new Slider(0f, 1f, 0.1f, false, skin);
-		// volumeSlider.setValue(settings.getVolume());
-		// volumeSlider.addListener(new ChangeListener(){
-		//
-		// @Override
-		// public void changed(ChangeEvent event, Actor actor) {
-		// volumeSlider.setValue(volumeSlider.getVisualValue());
-		// settings.setVolume(volumeSlider.getValue());
-		// }
-		//
-		// });
-
-		//stage.addActor(volumeSlider);
 		stage.addActor(btnBack);
-		stage.addActor(btnPlay);
-		stage.addActor(btnDashboard);
 		stage.addActor(label);
+
+		if (Gdx.app.getType() == ApplicationType.Android)
+			stage.addActor(btnDashboard);
 
 	}
 

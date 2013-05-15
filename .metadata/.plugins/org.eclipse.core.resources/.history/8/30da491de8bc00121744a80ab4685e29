@@ -1,0 +1,109 @@
+package com.undeadstudio.returners.screens;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.undeadstudio.returners.Returners;
+
+public abstract class AbstractMenuScreen implements Screen {
+
+	float columns, rows;
+	float[] xColumn;
+	TextButton[][] buttonGrid;
+	String[] labels;
+	
+	Stage stage;
+	SpriteBatch batch;
+	TextureAtlas atlas;
+	Skin skin;
+	BitmapFont black;
+	BitmapFont white;
+
+	public AbstractMenuScreen(String title, int columns, int rows,
+			String[] labels) {
+		this.columns = columns;
+		this.rows = rows;
+		buttonGrid = new TextButton[columns][rows];
+		this.labels = labels;
+		
+		
+	}
+
+	@Override
+	public void show() {
+		
+		batch = new SpriteBatch();
+		skin = new Skin();
+		// sliderSkin = new Skin(Gdx.files.internal("data/uiskin.json"));
+		atlas = new TextureAtlas(Gdx.files.internal("data/imgs/button.pack"));
+		skin.addRegions(atlas);
+		white = new BitmapFont(Gdx.files.internal("data/imgs/whitefont.fnt"),
+				false);
+		black = new BitmapFont(Gdx.files.internal("data/imgs/font.fnt"), false);
+
+		
+		
+		for (int i = 0; i < columns; i++) {
+			for (int j = 0; j < rows; j++) {
+				buttonGrid[i][j] = new TextButton(labels[i+j], skin);
+			}
+		}
+		
+		if (Returners.DEBUG)
+			Gdx.app.log(Returners.LOG, "Abstract menu screen initialized!");
+	}
+
+	@Override
+	public void render(float delta) {
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		stage.act(delta);
+
+		batch.begin();
+		stage.draw();
+		batch.end();
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		if (stage == null) {
+			stage = new Stage(width, height, true);
+		}
+		stage.clear();
+
+		Gdx.input.setInputProcessor(stage);
+		
+		TextButtonStyle style = new TextButtonStyle();
+		style.up = skin.getDrawable("buttonnormal");
+		style.down = skin.getDrawable("buttonpressed");
+		style.font = black;
+	}
+
+	@Override
+	public void hide() {
+
+	}
+
+	@Override
+	public void pause() {
+
+	}
+
+	@Override
+	public void resume() {
+
+	}
+
+	@Override
+	public void dispose() {
+
+	}
+
+}

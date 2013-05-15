@@ -1,0 +1,13 @@
+package com.undeadstudio.returners.screens;
+
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.undeadstudio.returners.Returners;
+
+public class GameOverScreen extends AbstractMenuScreen {
+
+	public GameOverScreen(Returners game) {
+		super(game);
+		// TODO Auto-generated constructor stub
+	}
+
+}

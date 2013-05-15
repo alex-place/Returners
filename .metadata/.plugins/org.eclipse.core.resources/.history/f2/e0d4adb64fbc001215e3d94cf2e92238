@@ -1,0 +1,12 @@
+package com.undeadstudio.returners.persistence;
+
+import com.swarmconnect.SwarmLeaderboard;
+
+public class SwarmHandler {
+	
+	public static void submitHighScore(float score){
+	    SwarmLeaderboard.submitScore(9145, score);
+
+	}
+
+}

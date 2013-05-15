@@ -1,0 +1,23 @@
+package com.undeadstudio.returners.persistence;
+
+import com.swarmconnect.SwarmLeaderboard;
+
+public class SwarmHandler {
+
+	private boolean scoreSubmitted = false;
+
+	public static void submitHighScore(float score) {
+		if(is)
+		SwarmLeaderboard.submitScore(9145, score);
+
+	}
+
+	public void setScoreSubmitted(boolean scoreSubmitted) {
+		this.scoreSubmitted = scoreSubmitted;
+	}
+
+	public boolean isScoreSubmitted() {
+		return scoreSubmitted;
+	}
+
+}
