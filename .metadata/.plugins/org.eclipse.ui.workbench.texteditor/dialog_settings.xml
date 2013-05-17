@@ -3,28 +3,30 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="257" key="DIALOG_WIDTH"/>
 		<item value="125" key="DIALOG_Y_ORIGIN"/>
-		<item value="992" key="DIALOG_X_ORIGIN"/>
 		<item value="380" key="DIALOG_HEIGHT"/>
+		<item value="992" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="casesensitive"/>
 		<item value="false" key="isRegEx"/>
+		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="btnPlay" key="selection"/>
+		<item value="title" key="selection"/>
 		<list key="findhistory">
-			<item value="btnplay"/>
-			<item value="btnPlay.getHeight()"/>
-			<item value="btnPlay.getWidth()"/>
-			<item value="game"/>
-			<item value="// TODO Auto-generated method stub"/>
-			<item value="&#x09;&#x09;// TODO Auto-generated method stub"/>
-			<item value="// TODO Auto-generated constructor stub"/>
-			<item value=" // TODO Auto-generated constructor stub"/>
+			<item value="title"/>
+			<item value="stage"/>
+			<item value="returners"/>
+			<item value="sr.end"/>
+			<item value="disp"/>
+			<item value="world"/>
+			<item value="checkAchievements"/>
+			<item value="settings"/>
 		</list>
 		<list key="replacehistory">
+			<item value="lblScore"/>
+			<item value="sco"/>
 			<item value="SettingsScreen.height"/>
 			<item value="SettingsScreen.width"/>
 			<item value=""/>

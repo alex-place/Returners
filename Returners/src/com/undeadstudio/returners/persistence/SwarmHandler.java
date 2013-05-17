@@ -20,9 +20,9 @@ public class SwarmHandler {
 	public static boolean isScoreSubmitted() {
 		return scoreSubmitted;
 	}
-	
-	public void checkAchievements(float score){
-		if(score >= 1)
+
+	public static void checkAchievements(float score) {
+		if (score >= 1)
 			SwarmAchievement.unlock(13851);
 	}
 

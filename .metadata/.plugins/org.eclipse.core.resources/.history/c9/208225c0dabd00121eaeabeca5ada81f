@@ -1,0 +1,77 @@
+package com.undeadstudio.returners.persistence;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
+
+public class Settings {
+
+	private static final String PREFS_NAME = "returners";
+	
+
+	protected static Preferences prefs = Gdx.app.getPreferences(PREFS_NAME);
+
+	public static String getPrefsName() {
+		return PREFS_NAME;
+	}
+
+	/**
+	 * @return the score
+	 */
+	public static float getScore() {
+		return prefs.getFloat("score", 0);
+	}
+
+	/**
+	 * @param Set
+	 *            score to score
+	 */
+	public static void setScore(float score) {
+		prefs.putFloat("score", score);
+	}
+
+	/**
+	 * @return the volume
+	 */
+	public static float getVolume() {
+		return prefs.getFloat("volume", 1);
+	}
+
+	/**
+	 * @param Set
+	 *            volume to volume
+	 */
+	public static void setVolume(float volume) {
+		prefs.putFloat("volume", volume);
+	}
+
+	/**
+	 * @return the speed
+	 */
+	public static float getSpeed() {
+		return prefs.getFloat("speed", 1);
+	}
+
+	/**
+	 * @param Set
+	 *            speed to speed
+	 */
+	public static void setSpeed(float speed) {
+		prefs.putFloat("speed", speed);
+	}
+
+	/**
+	 * @return the attack
+	 */
+	public static float getAttack() {
+		return prefs.getFloat("attack", 1);
+	}
+
+	/**
+	 * @param Set
+	 *            attack to attack
+	 */
+	public static void setAttack(float attack) {
+		prefs.putFloat("attack", attack);
+	}
+
+}

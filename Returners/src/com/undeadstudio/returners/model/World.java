@@ -5,11 +5,15 @@ import java.util.Iterator;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.undeadstudio.returners.Returners;
 import com.undeadstudio.returners.controller.InputHandler;
@@ -47,12 +51,17 @@ public class World {
 	TextureAtlas atlas;
 	TextButton button;
 
+	Label label;
+	BitmapFont white;
+
 	public InputHandler input;
 
 	public InputMultiplexer plex;
 
 	Settings settings;
 	float score;
+	
+	String debug;
 
 	public World(Returners game) {
 		this.game = game;
@@ -63,6 +72,7 @@ public class World {
 				SettingsScreen.GAME_HEIGHT - 0.01f);
 		stage = new Stage();
 		input = new InputHandler(this);
+		debug = "Debug";
 
 		plex = new InputMultiplexer();
 		plex.addProcessor(input);
@@ -70,8 +80,6 @@ public class World {
 
 		Gdx.input.setCatchBackKey(true);
 		Gdx.input.setInputProcessor(plex);
-		
-		
 
 	}
 
@@ -84,18 +92,32 @@ public class World {
 	}
 
 	public void update(float delta) {
+		
+		if(Returners.DEBUG)
+			stage.addActor(label);
+		else
+			label.remove();
 
 		if (wall.health <= 0) {
 			Gdx.app.log(Returners.LOG, "GAME OVER");
-			settings.setScore(score);
 
 			if (Gdx.app.getType() == ApplicationType.Android) {
-				SwarmHandler.submitHighScore(settings.getScore());
+				SwarmHandler.submitHighScore(score);
 				SwarmHandler.setIsScoreSubmitted(true);
+
+				if (score > 0) {
+					SwarmHandler.checkAchievements(score);
+				}
 			}
+
+			if(score > Settings.getScore())
+			Settings.setScore(score);
 			
+			if(Returners.DEBUG)
+			Gdx.app.log(Returners.LOG, Settings.getScore() + "");
+
 			game.setScreen(new GameOverScreen(game));
-			
+
 		}
 
 		stage.act();
@@ -149,9 +171,10 @@ public class World {
 		}
 
 		if (enemies.size == 0) {
-			enemies = factory.newWalkerWave(enemies, EnemyFactory.WAVE_WALKER);
 			enemies = factory
-					.newShooterWave(enemies, EnemyFactory.WAVE_SHOOTER);
+					.newWalkerWave(enemies, EnemyFactory.WAVE_WALKER++);
+			enemies = factory.newShooterWave(enemies,
+					EnemyFactory.WAVE_SHOOTER++);
 		}
 
 		enemyBulletIterator = enemyBullets.iterator();
@@ -209,6 +232,16 @@ public class World {
 		}
 
 		stage.clear();
+
+		white = new BitmapFont(Gdx.files.internal("data/imgs/whitefont.fnt"),
+				false);
+		LabelStyle ls = new LabelStyle(white, Color.WHITE);
+		label = new Label("", ls);
+		label.setX(0);
+		label.setY(Gdx.graphics.getHeight() - 100);
+		label.setWidth(width);
+		label.setAlignment(Align.center);
+		
 
 		plex = new InputMultiplexer();
 

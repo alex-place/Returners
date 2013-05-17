@@ -55,6 +55,8 @@ public class SettingsScreen implements Screen {
 		this.game = game;
 		if (Gdx.app.getType() == ApplicationType.WebGL)
 			show();
+		
+		settings = new Settings();
 
 		if (Returners.DEBUG)
 			Gdx.app.log(Returners.LOG, "Settings screen initialized!");

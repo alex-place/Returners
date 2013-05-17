@@ -1,0 +1,71 @@
+package com.undeadstudio.returners.model;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
+import com.undeadstudio.returners.screens.SettingsScreen;
+
+public class Shooter extends MovableEnemy {
+
+	// private static final float bulSpeed = 1;
+	protected float health = 1;
+	protected float counter = 75;
+	protected float i = 0;
+
+	public Shooter(float SPEED, float width, float height, Vector2 position) {
+		super(SPEED, width, height, position);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public float getStoppingDistance() {
+		// TODO Auto-generated method stub
+		return (SettingsScreen.GAME_WIDTH / 4) * 3;
+	}
+
+	@Override
+	public void isHit() {
+		;
+	}
+
+	@Override
+	public float getHealth() {
+		return health;
+	}
+
+	@Override
+	public boolean advance(float delta, Player player) {
+		if (position.x > getStoppingDistance()) {
+
+			position.add(velocity.tmp()
+					.mul(Gdx.graphics.getDeltaTime() * SPEED));
+
+			bounds.x = position.x;
+			bounds.y = position.y;
+			return super.advance(delta, player);
+
+		} else
+			return false;
+
+	}
+
+	@Override
+	public TYPE getType() {
+		return TYPE.SHOOTER;
+	}
+
+	@Override
+	public void attack(World world) {
+
+		if (i >= counter) {
+			world.addEnemyBullet(new Bullet(Bullet.getSpeed(), 0, .1f, 8 / 20f,
+					new Vector2(position.x + bounds.getWidth() / 2, position.y
+							+ bounds.getHeight() / 2), new Vector2(-2, 0),
+					Bullet.TYPE.FRIEND));
+			i = 0;
+		} else {
+			i++;
+		}
+
+	}
+
+}

@@ -1,0 +1,227 @@
+package com.undeadstudio.returners.model;
+
+import java.util.Iterator;
+
+import com.badlogic.gdx.Application.ApplicationType;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.Array;
+import com.undeadstudio.returners.Returners;
+import com.undeadstudio.returners.controller.InputHandler;
+import com.undeadstudio.returners.persistence.Settings;
+import com.undeadstudio.returners.persistence.SwarmHandler;
+import com.undeadstudio.returners.screens.GameOverScreen;
+import com.undeadstudio.returners.screens.SettingsScreen;
+import com.undeadstudio.returners.view.Hud;
+import com.undeadstudio.returners.view.WorldRenderer;
+
+public class World {
+
+	Returners game;
+	Player player;
+	Wall wall;
+	Hud hud = new Hud(this);
+
+	EnemyFactory factory = new EnemyFactory();
+	WorldRenderer wr;
+
+	Enemy e;
+	Array<Enemy> enemies = new Array<Enemy>();
+	Iterator<Enemy> eIter;
+
+	Bullet b;
+	Array<Bullet> bullets = new Array<Bullet>();
+	Iterator<Bullet> bIter;
+
+	Bullet enemyBullet;
+	Iterator<Bullet> enemyBulletIterator;
+	Array<Bullet> enemyBullets = new Array<Bullet>();
+
+	public Stage stage;
+	BitmapFont font;
+	TextureAtlas atlas;
+	TextButton button;
+
+	public InputHandler input;
+
+	public InputMultiplexer plex;
+
+	Settings settings;
+	float score;
+
+	public World(Returners game) {
+		this.game = game;
+		settings = game.getSettings();
+		player = new Player(new Vector2(SettingsScreen.GAME_WIDTH / 20,
+				SettingsScreen.GAME_HEIGHT / 2), 2, 2, 0, 5f);
+		wall = new Wall(player, new Vector2(3, 0), 1,
+				SettingsScreen.GAME_HEIGHT - 0.01f);
+		stage = new Stage();
+		input = new InputHandler(this);
+
+		plex = new InputMultiplexer();
+		plex.addProcessor(input);
+		plex.addProcessor(stage);
+
+		Gdx.input.setCatchBackKey(true);
+		Gdx.input.setInputProcessor(plex);
+		
+		
+
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public Array<Enemy> getEnemies() {
+		return enemies;
+	}
+
+	public void update(float delta) {
+
+		if (wall.health <= 0) {
+			Gdx.app.log(Returners.LOG, "GAME OVER");
+			
+
+			if (Gdx.app.getType() == ApplicationType.Android) {
+				SwarmHandler.submitHighScore(score);
+				SwarmHandler.setIsScoreSubmitted(true);
+			}
+			
+			game.setScreen(new GameOverScreen(game));
+			
+		}
+
+		stage.act();
+
+		player.update();
+		wall.update();
+
+		bIter = bullets.iterator();
+		while (bIter.hasNext()) {
+			b = bIter.next();
+			b.update(player);
+		}
+
+		bIter = bullets.iterator();
+		while (bIter.hasNext()) {
+			b = bIter.next();
+
+			eIter = enemies.iterator();
+			while (eIter.hasNext()) {
+				e = eIter.next();
+
+				if (e.getBounds().overlaps(b.getBounds())) {
+
+					if (Returners.DEBUG)
+						Gdx.app.log(Returners.LOG, "Enemy hit!");
+
+					if (b.getType() == Bullet.TYPE.FRIEND)
+						e.isHit();
+
+					if (e.getHealth() <= 0) {
+						eIter.remove();
+						score++;
+					}
+
+					b.OutOfBounds = true;
+				}
+			}
+
+			if (b.OutOfBounds)
+				bIter.remove();
+		}
+
+		eIter = enemies.iterator();
+
+		while (eIter.hasNext()) {
+			e = eIter.next();
+			if (e.advance(Gdx.graphics.getDeltaTime(), player) == false) {
+				e.attack(this);
+			}
+
+		}
+
+		if (enemies.size == 0) {
+			enemies = factory.newWalkerWave(enemies, EnemyFactory.WAVE_WALKER++);
+			enemies = factory
+					.newShooterWave(enemies, EnemyFactory.WAVE_SHOOTER++);
+		}
+
+		enemyBulletIterator = enemyBullets.iterator();
+		while (enemyBulletIterator.hasNext()) {
+			enemyBullet = enemyBulletIterator.next();
+			enemyBullet.update(player);
+
+			if (enemyBullet.bounds.overlaps(wall.bounds)) {
+				enemyBullet.OutOfBounds = true;
+
+			}
+			if (enemyBullet.OutOfBounds)
+				enemyBulletIterator.remove();
+		}
+
+		enemies.shrink();
+		
+		if(score > 0)
+			SwarmHandler.checkAchievements(score);
+
+	}
+
+	public void addBullet(Bullet b) {
+		bullets.add(b);
+	}
+
+	public void addEnemyBullet(Bullet b) {
+		enemyBullets.add(b);
+	}
+
+	public Array<Bullet> getBullets() {
+		return bullets;
+	}
+
+	public Array<Bullet> getEnemyBullets() {
+		return enemyBullets;
+	}
+
+	public void setRenderer(WorldRenderer wr) {
+		this.wr = wr;
+	}
+
+	public WorldRenderer getRenderer() {
+		return wr;
+	}
+
+	public void dispose() {
+		wr.dispose();
+	}
+
+	public Returners getGame() {
+		return game;
+	}
+
+	public void resize(int width, int height) {
+		if (stage == null) {
+			stage = new Stage(width, height, true);
+		}
+
+		stage.clear();
+
+		plex = new InputMultiplexer();
+
+		plex.addProcessor(input);
+
+		Gdx.input.setInputProcessor(plex);
+
+	}
+
+	public Wall getWall() {
+		return wall;
+	}
+}

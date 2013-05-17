@@ -25,4 +25,6 @@
 <fullyQualifiedTypeName name="com.undeadstudio.returners.Returners"/>
 <fullyQualifiedTypeName name="com.undeadstudio.returners.model.World"/>
 <fullyQualifiedTypeName name="com.swarmconnect.SwarmAchievement"/>
+<fullyQualifiedTypeName name="com.undeadstudio.returners.screens.SettingsScreen"/>
+<fullyQualifiedTypeName name="com.undeadstudio.returners.persistence.Settings"/>
 </qualifiedTypeNameHistroy>

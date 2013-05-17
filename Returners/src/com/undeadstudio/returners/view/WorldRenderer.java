@@ -108,13 +108,6 @@ public class WorldRenderer {
 		// Commence rendering
 
 		// Draw the Heads-Up-Display(HUD)
-		sr.begin(ShapeType.Line);
-		sr.setProjectionMatrix(cam.combined);
-		sr.setColor(Color.CYAN);
-
-		sr.rect(wall.getBounds().x, wall.getBounds().y, wall.getBounds().width,
-				wall.getBounds().height);
-		sr.end();
 
 		batch.begin();
 
@@ -141,9 +134,6 @@ public class WorldRenderer {
 						e.getWidth(), e.getHeight(), 1, 1, e.getRotation(), 0,
 						0, followerTexture.getWidth(),
 						followerTexture.getHeight(), false, false);
-
-			// else if (e.getType() == TYPE.BOSS)
-			// batch.draw
 
 			else
 				batch.draw(followerTexture, e.getPosition().x,
@@ -190,6 +180,14 @@ public class WorldRenderer {
 		if (Returners.DEBUG) {
 
 			sr.begin(ShapeType.Line);
+
+			// Draw the wall bounds
+			sr.setProjectionMatrix(cam.combined);
+			sr.setColor(Color.CYAN);
+
+			sr.rect(wall.getBounds().x, wall.getBounds().y,
+					wall.getBounds().width, wall.getBounds().height);
+
 			sr.setColor(Color.CYAN);
 			sr.rect(player.getBounds().x, player.getBounds().y,
 					player.getBounds().width, player.getBounds().height);
@@ -231,11 +229,11 @@ public class WorldRenderer {
 	}
 
 	public void dispose() {
+		sr.dispose();
 		batch.dispose();
 		playerTexture.dispose();
 		followerTexture.dispose();
 		bulletTexture.dispose();
-		sr.dispose();
 
 	}
 }

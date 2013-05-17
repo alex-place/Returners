@@ -1,0 +1,12 @@
+package com.undeadstudio.returners.persistence;
+
+public class Settings {
+
+	private static final String PREFS_NAME = "returners";
+	private static float score = 0;
+
+	public static String getPrefsName() {
+		return PREFS_NAME;
+	}
+
+}

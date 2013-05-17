@@ -37,7 +37,8 @@ public class GameOverScreen implements Screen {
 
 	TextButton[] buttons;
 
-	Label label;
+	Label title;
+	Label lblScore;
 
 	Settings settings;
 
@@ -48,8 +49,8 @@ public class GameOverScreen implements Screen {
 	public static float column2;
 
 	public static boolean GAME_PAUSED = false;
-	public static float GAME_WIDTH = Gdx.graphics.getWidth() / 50;
-	public static float GAME_HEIGHT = Gdx.graphics.getHeight() / 50;
+	public static float GAME_WIDTH = width / 4;
+	public static float GAME_HEIGHT = height / 4;
 	public static boolean GAME_OVER = false;
 	public static float VOLUME = 1;
 
@@ -109,8 +110,8 @@ public class GameOverScreen implements Screen {
 		btnLeaderboard = new TextButton("Leaderboard", style);
 		btnLeaderboard.setX(column2);
 		btnLeaderboard.setY(Gdx.graphics.getHeight() / 2);
-		btnLeaderboard.setWidth(GAME_WIDTH);
-		btnLeaderboard.setHeight(GAME_HEIGHT);
+		btnLeaderboard.setWidth(SettingsScreen.width);
+		btnLeaderboard.setHeight(SettingsScreen.height);
 		btnLeaderboard.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
@@ -143,14 +144,21 @@ public class GameOverScreen implements Screen {
 		});
 
 		LabelStyle ls = new LabelStyle(white, Color.WHITE);
-		label = new Label("The Returners", ls);
-		label.setX(0);
-		label.setY(Gdx.graphics.getHeight() - 100);
-		label.setWidth(width);
-		label.setAlignment(Align.center);
+		title = new Label("Game Over", ls);
+		title.setX(0);
+		title.setY(Gdx.graphics.getHeight() - 100);
+		title.setWidth(width);
+		title.setAlignment(Align.center);
+
+		lblScore = new Label("Highscore " + Settings.getScore(), ls);
+		lblScore.setX(0);
+		lblScore.setY(Gdx.graphics.getHeight() - 150);
+		lblScore.setWidth(width);
+		lblScore.setAlignment(Align.center);
 
 		stage.addActor(btnBack);
-		stage.addActor(label);
+		stage.addActor(title);
+		stage.addActor(lblScore);
 
 		if (Gdx.app.getType() == ApplicationType.Android)
 			stage.addActor(btnLeaderboard);

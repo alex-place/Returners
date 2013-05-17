@@ -1,0 +1,14 @@
+package com.undeadstudio.returners.persistence;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
+
+public class Settings {
+	
+	private static final String PREFS_NAME = "returners";
+
+	public static String getPrefsName() {
+		return PREFS_NAME;
+	}
+
+}
