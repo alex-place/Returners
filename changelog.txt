@@ -1,5 +1,16 @@
-Title: Returners
+Title: The Returners
 Style: 2D castle defense
+
+V0.1.9
+
+	* Added persistence through Libgdx Preferences.
+	* Highscore is now saved to file.
+
+
+V0.1.8
+
+	* Added achievement "First Blood" on Android build
+
 
 V0.1.7
 
